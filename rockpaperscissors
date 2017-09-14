@@ -1,0 +1,119 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package rpsmethods;
+
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ *
+ * @author AmandaCarbajal
+ */
+public class RPSMethods {
+//class contains everything in it
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        displayOpeningMessage();
+        Scanner s = new Scanner(System.in);
+        int Userinput = getUserMove(s);
+        int cpu = getCPUMove();
+        determineWinner(Userinput, cpu);
+
+    }
+//main method
+
+    public static void displayOpeningMessage() {
+
+        System.out.println(" To play rock, paper scissors against the computer, choose any number from 0 to 2.");
+        System.out.println("Select 0 to choose scissors. 1 is rock, 2 is paper.");
+        System.out.println("The computer will automatically generate a choice against yours.");
+
+    }
+
+    public static int getUserMove(Scanner s) {
+
+        int scissors; // we know each of the options will be a fixed integer
+        int rock; //a positive number
+        int paper; //anything form 0 to 2
+        scissors = 0;// telling the computer every time a 0 is chosen, it means scissors
+        rock = 1;//telling the computer every time a 2 is chosen, it means rock
+        paper = 2;//telling the computer every time a 2 is chosen, it means paper
+        int i = 1;// we estabish we start at one for this loop
+
+        int Userinput;// telling the computer user input will be an integer 
+        Random rnd = new Random();//Generates # btwn 0 and 2
+        int cpu = rnd.nextInt(3); // cpu is the number that the computer will randomly choose to play
+
+    
+
+      
+
+        do {
+             
+             Userinput = s.nextInt();//using the scanner which interacts with a user's inputs to call upon what the user will choose 
+             
+               if (Userinput > 2 || Userinput <= -1) { //here are the parameters for when it needs to restart the game
+            System.out.println("Invalid Selection, please choose any number from 0 to 2.");
+           
+
+        }
+
+        } while (Userinput > 2 || Userinput <= -1); //here we are telling it the parameters for whe nto prompt the userinput again
+
+ //shortcut to prompt the scanner which asks the user for their input again
+        return Userinput;
+
+    }
+    ////in this method we use the scanner. we imorted the scanner in the begining
+    //  }
+    //
+
+    public static int getCPUMove() {
+
+        Random rnd = new Random();//Generates # btwn 0 and 2
+        int cpu = rnd.nextInt(3); // cpu is the number that the computer will randomly choose to play
+System.out.println(new Random().nextInt());
+        //        //this method will call upon the computers move against the player
+        return cpu; //it will send back the cpu value
+        
+    } 
+
+    public static void determineWinner(int Userinput, int cpu) {
+
+        int scissors; // we know each of the options will be a fixed integer
+        int rock; //a positive number
+        int paper; //anything form 0 to 3
+        scissors = 0;// telling the computer every time a 0 is chosen, it means scissors
+        rock = 1;//telling the computer every time a 2 is chosen, it means rock
+        paper = 2;//telling the computer every time a 2 is chosen, it means paper
+        int i = 1;// we estabish we start at one for this loop
+
+        if (Userinput >= 3 || (Userinput <= -1)) {// this is a simple game that can only work is 0 1 2 are used. gotta make sure that
+            //the computer will tell the user if they use any number bigger than 3 or any number -1 or smaller
+            System.out.println("Invalid Selection to play this game. Try again and choose 0 for scissors,1 for rock or 2 for paper.");
+        }//gotta give the program something to say to the user if and when they type anything besides 0 1 2 so they know how to play the 
+        //game right 
+        if ((Userinput == scissors && cpu == rock) || (Userinput == paper && cpu == scissors) || (Userinput == rock && cpu == paper)) // here i placed all the ways the computer can win in response to the three different
+        //combinations that could exist to allow the computer to beat the user based on inputs
+        {
+            System.out.println("Computer wins this round.");//this is the message the program will give the user if they lost according to the
+            //aforementioned settings
+        } else if (Userinput == cpu) { //but there is also a chance that the comp might pick what the user puts and in that case there 
+            //is a draw and so nobody wins
+            System.out.println("It's a draw. Nobody wins this round."); //here is a message that the program is telling the user about how 
+            //nobody won.
+        }
+
+        if ((Userinput == scissors && cpu == paper) || (Userinput == paper && cpu == rock) || (Userinput == rock && cpu == scissors)) {
+            System.out.println("You won!"); // here we have the three scenarios where the user could win against the computer...we used the in and or statements together as 
+            //in the user loosing scenario 
+        }
+    }
+
+}
